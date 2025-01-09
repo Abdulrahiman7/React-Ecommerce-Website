@@ -4,7 +4,7 @@ import { Card, Col, Button } from "react-bootstrap";
 
 const Item = (props) => {
   return (
-    <Col xs={12} md={6} lg={6}>
+    <Col xs={12} md={6} lg={6} sm>
       <Card className="mb-4">
         <Card.Header>
           <h2>{props.item.title}</h2>

@@ -1,0 +1,9 @@
+.custom-modal {
+    position: fixed;
+    right: 20px;  /* Aligns the modal to the left */
+    top: 0;
+   transform: translateY(100px);
+   width: 300px;  /* Sets the width */
+ 
+  }
+  
