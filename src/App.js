@@ -1,17 +1,29 @@
 import "./App.css";
-import Button from "react-bootstrap/Button"; // Import from react-bootstrap
 import Header from "./components/Header/Header";
 import ItemsList from "./components/ItemsList/ItemsList";
 import { CartContextProvider } from "./store/Cart-context";
 import { ProductsContextProvider } from "./store/Products-context";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import About from "./components/About/About";
+import HomePage from "./components/HomePage/HomePage";
+import Cart from "./components/Cart/Cart";
+
 
 function App() {
+ const router=createBrowserRouter([
+  {path:'/store', element:<ItemsList />},
+  {path:'/about', element:<About />},
+  {path:'/', element:<HomePage />},
+  {path:'/cart', element:<Cart />}
+ ])
   return (
     <div className="App">
       <ProductsContextProvider>
         <CartContextProvider>
-          <Header></Header>
-          <ItemsList></ItemsList>
+          <Header />
+
+          <RouterProvider router={router} />
+
         </CartContextProvider>
       </ProductsContextProvider>
     </div>

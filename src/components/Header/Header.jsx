@@ -21,6 +21,9 @@ const Header = () => {
         </Nav>
       </Container>
     </Navbar>
+    <Container fluid className='m-0 mt-1 p-3 full-width ' style={{fontFamily:'Timesnewroman', backgroundColor:'grey', height:'150px'}}>
+        <h1 className='mt-4' style={{fontSize:'56px', fontWeight:'bolder', color:'white'}}>The Generics</h1>
+    </Container>
     <Cart showModal={cartVisible} closeModal={cartHideHandler} />
     </Fragment>
   );

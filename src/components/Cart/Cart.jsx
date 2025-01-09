@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Table } from "react-bootstrap";
 import CartItem from "./CartItem";
 import "./Cart.css";
 import CartContext from "../../store/Cart-context";
 
 const Cart = (props) => {
+    
   const {items}=useContext(CartContext);
     const totalPrice=items.reduce((acc, item)=> acc += (item.price * item.quantity),0);
   return (
