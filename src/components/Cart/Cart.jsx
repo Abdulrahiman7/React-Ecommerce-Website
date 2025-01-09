@@ -1,33 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Modal, Table } from "react-bootstrap";
 import CartItem from "./CartItem";
 import "./Cart.css";
+import CartContext from "../../store/Cart-context";
 
 const Cart = (props) => {
-  const cartElements = [
-    {
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-      quantity: 2,
-    },
-    {
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-      quantity: 3,
-    },
-    {
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-      quantity: 1,
-    },
-  ];
-
+  const {items}=useContext(CartContext);
+    const totalPrice=items.reduce((acc, item)=> acc += (item.price * item.quantity),0);
   return (
     <Modal show={props.showModal} onHide={props.closeModal} dialogClassName="custom-modal">
       <Modal.Header closeButton />
@@ -41,14 +20,14 @@ const Cart = (props) => {
                 <th>Quantity</th>
             </tr>
             {
-                cartElements.map((item,index)=>{
+                items.map((item,index)=>{
                     return <CartItem key={index} item={item} />
                 })
             }
           </thead>
         </Table>
       </Modal.Body>
-      <Modal.Footer className="me-2">Total Price</Modal.Footer>
+      <Modal.Footer className="me-2">Total Price : {totalPrice}</Modal.Footer>
     </Modal>
   );
 };

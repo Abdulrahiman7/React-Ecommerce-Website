@@ -1,40 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Row } from "react-bootstrap";
 import Item from "./Item";
+import ProductsContext from "../../store/Products-context";
 
 const ItemsList = () => {
-  const productsArr = [
-    {
-      title: "Colors",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-    },
-    {
-      title: "Black and white Colors",
-      price: 50,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-    },
-    {
-      title: "Yellow and Black Colors",
-      price: 70,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-    },
-    {
-      title: "Blue Color",
-      price: 100,
-      imageUrl:
-        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-    },
-  ];
+  const items=useContext(ProductsContext);
   return (
     <Container>
       <Row>
         {
-            productsArr.map((product)=><Item key={product.title} item={product} />)
-        }</Row>
+            items.map((product)=><Item key={product.title} item={product} />)
+        }
+        </Row>
     </Container>
   );
 };

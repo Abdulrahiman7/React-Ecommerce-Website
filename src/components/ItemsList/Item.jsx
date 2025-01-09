@@ -1,8 +1,13 @@
 
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Col, Button } from "react-bootstrap";
+import CartContext from "../../store/Cart-context";
 
 const Item = (props) => {
+    const {addToCart}=useContext(CartContext);
+    const addToCartHandler=()=>{
+        addToCart({...props.item, quantity:1});
+    }
   return (
     <Col xs={12} md={6} lg={6} sm>
       <Card className="mb-4">
@@ -14,7 +19,7 @@ const Item = (props) => {
         </Card.Body>
         <Card.Footer className="d-flex justify-content-between">
           <span>{props.item.price}</span>
-          <Button className="btn btn-danger">Add to Cart</Button>
+          <Button className="btn btn-danger" onClick={addToCartHandler}>Add to Cart</Button>
         </Card.Footer>
       </Card>
     </Col>
