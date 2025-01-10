@@ -39,7 +39,7 @@ const HomePage = () => {
   return (
     <Fragment>
     <Container fluid className='full-width mb-5 p-3 d-flex justify-content-center align-items-center' style={{background:'grey'}}>
-        <h3 style={{width:'300px',height:'50px', border:'2px solid red', color:'white'}}>Play Now</h3>
+        <h3 style={{width:'300px',height:'50px', border:'2px solid lightblue', color:'white'}}>Play Now</h3>
     </Container>
     <Table striped className='m-5'>
         {

@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/About/About";
 import HomePage from "./components/HomePage/HomePage";
 import Cart from "./components/Cart/Cart";
+import Films from "./components/Films/Films";
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
   {path:'/store', element:<ItemsList />},
   {path:'/about', element:<About />},
   {path:'/', element:<HomePage />},
-  {path:'/cart', element:<Cart />}
+  {path:'/cart', element:<Cart />},
+  {path:'/films',element:<Films />}
  ])
   return (
     <div className="App">
