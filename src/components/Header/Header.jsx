@@ -15,6 +15,7 @@ const Header = () => {
           <Nav.Link className="btn btn-primary text-light me-5" href="/">Home</Nav.Link>
           <Nav.Link className="btn btn-primary text-light me-5" href="/store">Store</Nav.Link>
           <Nav.Link className="btn btn-primary text-light me-5" href="/about">About</Nav.Link>
+          <Nav.Link className="btn btn-primary text-light me-5" href="/contact-us">Contact us</Nav.Link>
         </Nav>
         <Nav>
           <Button onClick={cartShowHandler}>Cart</Button>
