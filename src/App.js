@@ -3,28 +3,30 @@ import Header from "./components/Header/Header";
 import ItemsList from "./components/ItemsList/ItemsList";
 import { CartContextProvider } from "./store/Cart-context";
 import { ProductsContextProvider } from "./store/Products-context";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import About from "./components/About/About";
 import HomePage from "./components/HomePage/HomePage";
 import Cart from "./components/Cart/Cart";
 import ContactUs from "./components/ContactUs/ContactUs";
+import ItemPage from "./components/ItemsList/ItemPage";
 
 
 function App() {
- const router=createBrowserRouter([
-  {path:'/store', element:<ItemsList />},
-  {path:'/about', element:<About />},
-  {path:'/', element:<HomePage />},
-  {path:'/cart', element:<Cart />},
-  {path:'/contact-us',element:<ContactUs />}
- ])
   return (
     <div className="App">
       <ProductsContextProvider>
         <CartContextProvider>
+        <Router>
           <Header />
-
-          <RouterProvider router={router} />
+          <Switch>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/store" exact component={ItemsList} />
+            <Route path="/about" component={About} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/contact-us" component={ContactUs} />
+            <Route path="/store/:productId" component={ItemPage} />
+          </Switch>
+        </Router>
 
         </CartContextProvider>
       </ProductsContextProvider>

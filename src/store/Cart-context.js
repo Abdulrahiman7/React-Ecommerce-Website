@@ -10,7 +10,7 @@ export const CartContextProvider = (props) => {
   };
   //removing item from cart
   const removeFromCartHandler=(id)=>{
-    setItems((prev)=>prev.filter((item)=>item.id != id));
+    setItems((prev)=>prev.filter((item)=>item.id !== id));
   }
   const cartItem = {
     items: items,

@@ -35,14 +35,12 @@ const HomePage = () => {
           venue: "Concord Pavilion"
         }
       ];
-      const filmHandler=async ()=>{
-        
-      }
+    
   return (
     <Fragment>
     <Container fluid className='full-width mb-5 p-3 d-flex justify-content-center align-items-center' style={{background:'grey'}}>
         <h3 style={{width:'300px',height:'50px', border:'2px solid lightblue', color:'white'}}>Play Now</h3>
-        <Button onClick={filmsHandler}>get films</Button>
+        <Button>get films</Button>
     </Container>
     <Table striped className='m-5'>
         {
