@@ -13,6 +13,7 @@ import NotFound from "./components/Errors/NotFound";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
 import { AuthContextProvider } from "./store/Auth-context";
+import Profile from "./components/User/Profile/Profile";
 
 
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/store/:productId" component={ItemPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/profile" component={Profile} />
             <Route path='*' component={NotFound} />
           </Switch>
         </Router>

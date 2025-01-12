@@ -51,7 +51,7 @@ const Login = () => {
           setIsLoading(false);
           return res.json().then((data) => {
             if (data && data.error && data.error.message) {
-              alert("Error logging in", error.data.message);
+              alert("Error logging in", data.error.message);
             }
           });
         }

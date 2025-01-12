@@ -26,6 +26,7 @@ const Header = () => {
           </Nav>
         </Navbar.Collapse>
         <NavLink to="/login" activeClassName="active" className="btn btn-outline-light me-3">Login</NavLink>
+        <NavLink to="/profile" activeClassName="active" className="btn btn-outline-light me-3">profile</NavLink>
       </Container>
       <Nav>
         <Button variant="primary" onClick={cartShowHandler}>Cart</Button>
