@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../../../store/Auth-context";
 import { useHistory, NavLink } from "react-router-dom";
@@ -7,6 +7,9 @@ const Profile = () => {
   const { isLoggedIn, token, logout } = useContext(AuthContext);
   const [password, setPassword]=useState("");
     const history=useHistory();
+    useEffect(()=>{
+        if(!isLoggedIn) history.replace('/login');
+    },[])
   const updatePasswordHandler=(event)=>{
     event.preventDefault();
     const response = fetch(

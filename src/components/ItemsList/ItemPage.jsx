@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductsContext from '../../store/Products-context';
 import { Card, Button } from 'react-bootstrap';
 import CartContext from '../../store/Cart-context';
+import AuthContext from '../../store/Auth-context';
+import { useHistory } from 'react-router-dom';
 
 const ItemPage = () => {
     const items=useContext(ProductsContext);
     const {productId}=useParams();
+    
   
    const item= items.find((item)=>{
   // Log the title of each item

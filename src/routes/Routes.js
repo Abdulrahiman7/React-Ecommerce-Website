@@ -26,8 +26,7 @@ const Routes = () => {
             <Route path="/store/:productId" component={ItemPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
-            {isLoggedIn && <Route path="/profile" component={Profile} />}
-            {!isLoggedIn && <Redirect to='/login' />}
+            <Route path="/profile" component={Profile} />
             <Route path='*' component={NotFound} />
           </Switch>
         </Router>
