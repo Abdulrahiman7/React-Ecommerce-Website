@@ -9,9 +9,12 @@ import HomePage from "./components/HomePage/HomePage";
 import Cart from "./components/Cart/Cart";
 import ContactUs from "./components/ContactUs/ContactUs";
 import ItemPage from "./components/ItemsList/ItemPage";
+import NotFound from "./components/Errors/NotFound";
+
 
 
 function App() {
+  
   return (
     <div className="App">
       <ProductsContextProvider>
@@ -25,6 +28,7 @@ function App() {
             <Route path="/cart" component={Cart} />
             <Route path="/contact-us" component={ContactUs} />
             <Route path="/store/:productId" component={ItemPage} />
+            <Route path='*' component={NotFound} />
           </Switch>
         </Router>
 
