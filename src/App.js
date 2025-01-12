@@ -10,6 +10,9 @@ import Cart from "./components/Cart/Cart";
 import ContactUs from "./components/ContactUs/ContactUs";
 import ItemPage from "./components/ItemsList/ItemPage";
 import NotFound from "./components/Errors/NotFound";
+import Login from "./components/User/Login";
+import SignUp from "./components/User/SignUp";
+import { AuthContextProvider } from "./store/Auth-context";
 
 
 
@@ -17,6 +20,7 @@ function App() {
   
   return (
     <div className="App">
+      <AuthContextProvider>
       <ProductsContextProvider>
         <CartContextProvider>
         <Router>
@@ -28,12 +32,15 @@ function App() {
             <Route path="/cart" component={Cart} />
             <Route path="/contact-us" component={ContactUs} />
             <Route path="/store/:productId" component={ItemPage} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
             <Route path='*' component={NotFound} />
           </Switch>
         </Router>
 
         </CartContextProvider>
       </ProductsContextProvider>
+      </AuthContextProvider>
     </div>
   );
 }

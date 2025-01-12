@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink, Prompt } from "react-router-dom";
+import { Form, Button, Container, Spinner } from "react-bootstrap";
 
 const SignUp = () => {
   const history = useHistory();
@@ -8,10 +9,14 @@ const SignUp = () => {
     email: "",
     password: "",
     number: "",
+  
   });
   const [error, setError] = useState({});
   const [isEntering, setTsEntering] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const validityCheck=()=>{
+    return true;
+  }
 
   const signupHandler = (event) => {
     event.preventDefault();
@@ -20,41 +25,47 @@ const SignUp = () => {
       setError({ message: "enter valid input" });
       return;
     }
+    console.log(formData);
     const response = fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBX3cN7Q6nlKsiwbkxlDXzH0bkZNZdxzCo",
       {
-        method: "post",
-        body: JSON.stringify(formData),
+        method: "POST",
+        body: JSON.stringify({
+            name:formData.name,
+            email:formData.email,
+            password:formData.password,
+            number:formData.number,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
       }
     )
       .then((res) => {
-        isLoading(false);
+        setIsLoading(false);
         if (res.ok) {
           alert("User Successfully signed up");
           setTimeout(() => {
             history.push("/login");
           }, 1000);
         } else {
+            setIsLoading(false);
           return res.json().then((data) => {
             if (data && data.error && data.error.message) {
-              alert("Error Signing up", error.data.message);
+                console.log(data.error);
+              alert("Error Signing up", data.error.message);
             }
           });
         }
       })
-      .catch(err);
-    {
-      console.log(err);
-    }
+    
     console.log(formData);
   };
 
   const handleChange = (e) => {
     setTsEntering(false);
     const { name, value } = e.target;
+    if(!name) return;
     setFormData({ ...formData, [name]: value });
     setError({ [name]: "" });
   };
@@ -69,13 +80,13 @@ const SignUp = () => {
         <Prompt when={isEntering} message="you login data will be erased" />
       )}
       <Form onSubmit={signupHandler} onFocus={isEnteringHandler}>
-        <label htmlFor="name">email</label>
+        <label htmlFor="name">name</label>
         <input
-          type="nsme"
+          type="name"
           onChange={handleChange}
-          name="nsme"
-          value={formData.email}
-          id="nsme"
+          name="name"
+          value={formData.name}
+          id="name"
         />
         <label htmlFor="email">email</label>
         <input
@@ -86,19 +97,19 @@ const SignUp = () => {
           id="email"
         />
         <label htmlFor="password">password</label>
-        <input type="password" onChange={handleChange} id="password" />
-        <label htmlFor="number">email</label>
+        <input type="password" onChange={handleChange} id="password" value={formData.password} name="password"/>
+        <label htmlFor="number">number</label>
         <input
           type="number"
           onChange={handleChange}
           name="number"
-          value={formData.email}
+          value={formData.number}
           id="number"
         />
         {isLoading ? (
-          <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
+          <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
         ) : (
           <Button type="submit">SignUp</Button>
         )}

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import {Prompt} from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Button, Container, Form, Spinner } from "react-bootstrap";
+import {Prompt, NavLink} from "react-router-dom";
+import AuthContext from "../../store/Auth-context";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -8,28 +9,46 @@ const Login = () => {
   });
   const [error, setError] = useState({});
   const [isEntering, setTsEntering]= useState(false);
+  const [isLoading, setIsLoading]=useState(false);
+  const {login}=useContext(AuthContext);
+  const validityCheck=()=>{
+    return true;
+  }
 
   const loginHandler = (event) => {
     event.preventDefault();
+    setIsLoading(true);
     if (!validityCheck()) {
       setError({ message: "enter valid input" });
       return;
     }
+    
     const response = fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBX3cN7Q6nlKsiwbkxlDXzH0bkZNZdxzCo",
       {
-        method: "post",
-        body: JSON.stringify(formData),
+        method: "POST",
+        body: JSON.stringify({
+          email:formData.email,
+          password:formData.password,
+          "returnSecureToken": true
+        }),
         headers: {
           "Content-Type": "application/json",
         },
       }
     )
       .then((res) => {
-        isLoading(false);
+        setIsLoading(false);
         if (res.ok) {
-          alert("User Successfully logged in");
+          res.json()
+          .then((data)=> {
+            const loginSuccess=login(data.idToken)
+            if(loginSuccess) alert("User Successfully logged in");
+            else alert("error while reading token");
+          });
+          
         } else {
+          setIsLoading(false);
           return res.json().then((data) => {
             if (data && data.error && data.error.message) {
               alert("Error logging in", error.data.message);
@@ -37,10 +56,7 @@ const Login = () => {
           });
         }
       })
-      .catch(err)
-      {
-        console.log(err);
-      }
+      
   };
 
   const handleChange = (e) => {
@@ -71,9 +87,17 @@ const Login = () => {
         <input
           type="password"
           onChange={handleChange}
+          value={formData.password}
+          name="password"
           id="password"
         />
-        <Button type="submit">Login</Button>
+        {isLoading ? (
+          <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+        ) : (
+          <Button type="submit">Login</Button>
+        )}
       </Form>
       <NavLink to='/signup'>New User: Sign Up</NavLink>
     </Container>

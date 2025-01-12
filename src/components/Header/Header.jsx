@@ -11,7 +11,7 @@ const Header = () => {
   return (
   
     <Fragment>
-     <Navbar bg="dark" variant="dark" expand="lg" style={{display:'flex', justifyContent:'space-evenly'}}>
+     <Navbar bg="dark" variant="dark" expand="lg" style={{display:'flex', justifyContent:'space-between'}}>
      <Navbar.Brand >
           <NavLink to="/" className="text-white text-decoration-none">My Ecommerce</NavLink>
         </Navbar.Brand>
@@ -25,6 +25,7 @@ const Header = () => {
             <NavLink to="/contact-us" activeClassName="active" className="btn btn-outline-light me-3">Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
+        <NavLink to="/login" activeClassName="active" className="btn btn-outline-light me-3">Login</NavLink>
       </Container>
       <Nav>
         <Button variant="primary" onClick={cartShowHandler}>Cart</Button>
