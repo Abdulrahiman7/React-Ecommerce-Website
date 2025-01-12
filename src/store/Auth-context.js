@@ -11,21 +11,25 @@ const AuthContext=createContext(
 );
 
 export const AuthContextProvider=(props)=>{
-    const [token, setToken]=useState("");
+    const localStorageToken=localStorage.getItem('token');
+    const [token, setToken]=useState(localStorageToken);
+    const [isLoggedIn, setIsLoggedIn]=useState(!!localStorageToken);
     const loginHandler=(token)=>{
         if(!token) return false;
+        localStorage.setItem('token',token);
         setToken(token);
-        AuthContext.isLoggedIn=true;
+        setIsLoggedIn(true);
         return true;
     }
     const logoutHandler=()=>{
-        AuthContext.isLoggedIn=false;
+        setIsLoggedIn(false)
+        localStorage.removeItem('token');
         setToken("");
         return true;
     }
     const Auth={
         token:token,
-        isLoggedIn:AuthContext.isLoggedIn,
+        isLoggedIn:isLoggedIn,
         login:loginHandler,
         logout:logoutHandler
     }

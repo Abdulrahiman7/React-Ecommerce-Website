@@ -1,15 +1,23 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import Cart from '../Cart/Cart';
 import {NavLink , useLocation} from "react-router-dom";
+import AuthContext from '../../store/Auth-context';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Header = () => {
     const [cartVisible, setCartVisible]=useState(false);
     const cartShowHandler=()=>setCartVisible(true);
     const cartHideHandler=()=>setCartVisible(false);
-
+    const {isLoggedIn, logout}=useContext(AuthContext);
+    const history=useHistory();
+      const logoutHandler=()=>{
+        logout();
+        history.replace('/');
+        
+      }
   return (
-  
+
     <Fragment>
      <Navbar bg="dark" variant="dark" expand="lg" style={{display:'flex', justifyContent:'space-between'}}>
      <Navbar.Brand >
@@ -25,7 +33,8 @@ const Header = () => {
             <NavLink to="/contact-us" activeClassName="active" className="btn btn-outline-light me-3">Contact Us</NavLink>
           </Nav>
         </Navbar.Collapse>
-        <NavLink to="/login" activeClassName="active" className="btn btn-outline-light me-3">Login</NavLink>
+        {!isLoggedIn && <NavLink to="/login" activeClassName="active" className="btn btn-outline-light me-3">Login</NavLink>}
+        {isLoggedIn && <Button className='btn btn-outline-light me-3' onClick={logoutHandler}>Logout</Button>}
         <NavLink to="/profile" activeClassName="active" className="btn btn-outline-light me-3">profile</NavLink>
       </Container>
       <Nav>

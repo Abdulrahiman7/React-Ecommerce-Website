@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Container, Form, Spinner } from "react-bootstrap";
 import {Prompt, NavLink} from "react-router-dom";
 import AuthContext from "../../store/Auth-context";
+import { useHistory } from "react-router-dom";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -14,6 +15,7 @@ const Login = () => {
   const validityCheck=()=>{
     return true;
   }
+  const history=useHistory();
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -43,8 +45,8 @@ const Login = () => {
           res.json()
           .then((data)=> {
             const loginSuccess=login(data.idToken)
-            if(loginSuccess) alert("User Successfully logged in");
-            else alert("error while reading token");
+            
+            history.push('/');
           });
           
         } else {

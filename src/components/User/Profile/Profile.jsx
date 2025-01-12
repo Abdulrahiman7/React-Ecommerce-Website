@@ -27,6 +27,7 @@ const Profile = () => {
             {
                 alert('Password update Successfully, you will be redirected to login page');
                 setTimeout(()=>{
+                    
                     logout();
                     history.replace('/login');
                 },1000)
